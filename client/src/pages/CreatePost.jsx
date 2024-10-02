@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { preview } from '../assets'
 import { getRandomPrompt } from '../utils'
 import { FormField, Loader } from '../components'
+// import { response } from 'express'
 
 const CreatePost = () => {
     const navigate = useNavigate()
@@ -38,8 +39,29 @@ const CreatePost = () => {
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (form.prompt && form.photo) {
+            setLoading(true)
+            try {
+                const response = await fetch("http://localhost:5050/api/v1/post", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Tyoe': ' application/json',
+                    },
+                    body: JSON.stringify(form)
+                })
+                await response.json()
+                navigate('/')
+            } catch (error) {
+                alert(err)
 
+            } finally {
+                setLoading(false)
+            }
+        } else {
+            alert('Enter a valid prompt to generate image')
+        }
     }
 
     const handleChange = (e) => {
