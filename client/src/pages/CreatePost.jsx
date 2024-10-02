@@ -20,14 +20,15 @@ const CreatePost = () => {
         if (form.prompt) {
             try {
                 setgeneratingImg(true)
-                const response = await fetch('http://localhost:5050/api/v1/dalle', {
+                const response = await fetch('http://localhost:5050/api/v1/hface', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ prompt: form.prompt })
                 })
-                const data = await response.json
+                const data = await response.json()
+                console.log(data); // Check if photo is defined
                 setform({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
             } catch (error) {
                 alert(error)
@@ -80,7 +81,7 @@ const CreatePost = () => {
                     Create your own Ai generated images
                 </h1>
                 <p className=' mt-2 text-[#666e75] text-[16px] max-w-[500px]'>
-                    Powered with Dalle AI
+                    Note: Since i am running short on credits , i am using Flux so loading time can be little longer
                 </p>
             </div>
 
