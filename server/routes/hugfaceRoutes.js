@@ -41,17 +41,18 @@ router.route('/').post(async (req, res) => {
     const { prompt } = req.body;
     try {
         const base64Image = await query({ inputs: prompt });
-        const filePath = path.join('./', 'generated_image.txt');
+        const filePath = path.join('./', 'Prompt_logs.txt');
 
-        // Write the base64 string to a text file (just to check for errors)
-        fs.writeFile(filePath, base64Image, (err) => {
+        // TO maintain history 
+        var timeInMss = new Date().getTime()
+        fs.appendFile(filePath, `/t${timeInMss}:${prompt} `, (err) => {
             if (err) {
                 console.error('Error writing the file:', err);
                 return;
             }
         })
 
-        console.log('Base64 image has been written to file:', filePath);
+        console.log('Logs the requested promot at:', filePath);
         res.status(200).json({ photo: base64Image });
     } catch (error) {
         console.error(error);
