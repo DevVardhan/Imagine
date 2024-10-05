@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
-import { logo } from './assets' //assets are exported by default
+import { logo, logo2 } from './assets' //assets are exported by default
 
 import { CreatePost, Home } from './pages'
 
