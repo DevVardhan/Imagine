@@ -29,9 +29,15 @@ router.route("/").get(async (req, res) => {
 // Create a post
 router.route("/").post(async (req, res) => {
     try {
-
         const { name, prompt, photo } = req.body
-        const photoUrl = await cloudinary.uploader.upload(photo)
+        const photoUrl = await cloudinary.uploader.upload(photo, (error, result) => {
+            if (error) {
+                console.error("Cloudinary upload error: ", error);
+                return res.status(500).json({ success: false, message: "Failed to upload image" });
+            }
+            return result;
+        });
+
 
         const newPost = await Post.create({
             name,

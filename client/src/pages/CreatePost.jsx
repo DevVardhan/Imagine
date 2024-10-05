@@ -48,9 +48,9 @@ const CreatePost = () => {
                 const response = await fetch("http://localhost:5050/api/v1/post", {
                     method: 'POST',
                     headers: {
-                        'Content-Tyoe': ' application/json',
+                        'Content-Type': ' application/json',
                     },
-                    body: JSON.stringify(form)
+                    body: JSON.stringify({ ...form })
                 })
                 await response.json()
                 navigate('/')
