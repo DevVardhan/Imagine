@@ -1,4 +1,4 @@
-# AI-Powered Image Generation Platform
+# Imagine: AI-Powered Image Generation Platform
 
 This platform allows users to create, upload, and download images with the help of AI, specifically using Hugging Face's FLUX model.
 
