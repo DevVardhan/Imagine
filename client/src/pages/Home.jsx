@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
 import { Loader, FormField, Card } from '../components'
-import { useSearchParams } from 'react-router-dom'
 
 
 const RenderCards = ({ data, title }) => {
