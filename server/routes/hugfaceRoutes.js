@@ -1,7 +1,7 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
-import path from 'path';
-import fs from 'fs';
+import path from 'path'; // For local logs
+import fs from 'fs'; // For local file access
 
 dotenv.config()
 
@@ -43,7 +43,7 @@ router.route('/').post(async (req, res) => {
         const base64Image = await query({ inputs: prompt });
         const filePath = path.join('./', 'Prompt_logs.txt');
 
-        // TO maintain history 
+        // To maintain history 
         var timeInMss = new Date().getTime()
         fs.appendFile(filePath, `/t${timeInMss}:${prompt} `, (err) => {
             if (err) {

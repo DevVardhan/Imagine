@@ -1,8 +1,8 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
-import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary } from 'cloudinary' // Used for uploading media to webapp 
 
-import Post from '../mongodb/models/post.js'
+import Post from '../mongodb/models/post.js' // Mongoose model
 
 dotenv.config()
 
@@ -14,15 +14,15 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
-// get all post 
+// Get all post (used in useeffect for the home page)
 router.route("/").get(async (req, res) => {
     try {
-        const posts = await Post.find({}) // finds all post from post model
+        const posts = await Post.find({}) // Finds all post from post model
 
         res.status(200).json({ success: true, data: posts })
 
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message })
+        res.status(500).json({ success: false, message: error.message }) // In case when req is empty or headers are missing 
     }
 })
 
@@ -30,6 +30,8 @@ router.route("/").get(async (req, res) => {
 router.route("/").post(async (req, res) => {
     try {
         const { name, prompt, photo } = req.body
+
+        // Function retunrs an object with  parms id , url , createdate .. etc (refer cloudinary docs)
         const photoUrl = await cloudinary.uploader.upload(photo, (error, result) => {
             if (error) {
                 console.error("Cloudinary upload error: ", error);
@@ -38,7 +40,7 @@ router.route("/").post(async (req, res) => {
             return result;
         });
 
-
+        // Uploading a new post to database
         const newPost = await Post.create({
             name,
             prompt,
