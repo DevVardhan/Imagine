@@ -12,7 +12,11 @@ dotenv.config()
 
 const app = express()
 // Cors used for security and cross-origin access
-app.use(cors())
+app.use(cors({
+    origin: 'https://imagine-ha2n.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
+}));
 
 // Enables parsing json format in requests ; limited body size to 50mb since it is possible for images to be large
 app.use(express.json({ limit: '50mb' }))
