@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import * as dotenv from 'dotenv'
 import { preview } from '../assets'
 import { getRandomPrompt } from '../utils'
 import { FormField, Loader } from '../components'
@@ -20,7 +20,7 @@ const CreatePost = () => {
         if (form.prompt) {
             try {
                 setgeneratingImg(true)
-                const response = await fetch('http://localhost:5050/api/v1/hface', {
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/api/v1/hface`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ const CreatePost = () => {
         if (form.prompt && form.photo) {
             setLoading(true)
             try {
-                const response = await fetch("http://localhost:5050/api/v1/post", {
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND}/api/v1/post`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': ' application/json',
