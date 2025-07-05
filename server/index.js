@@ -12,12 +12,13 @@ dotenv.config()
 
 const app = express()
 // Cors used for security and cross-origin access
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type']
-}));
-
+// app.use(cors({
+//     origin: '*',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type']
+// }));
+app.use(cors());
+app.options('*', cors());
 // Enables parsing json format in requests ; limited body size to 50mb since it is possible for images to be large
 app.use(express.json({ limit: '50mb' }))
 
