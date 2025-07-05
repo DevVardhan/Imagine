@@ -13,7 +13,7 @@ dotenv.config()
 const app = express()
 // Cors used for security and cross-origin access
 app.use(cors({
-    origin: 'https://imagine-ha2n.vercel.app',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type']
 }));

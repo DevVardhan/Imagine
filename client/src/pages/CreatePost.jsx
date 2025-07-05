@@ -30,12 +30,12 @@ const CreatePost = () => {
                 console.log(data); // Check if photo is defined
                 setform({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
             } catch (error) {
-                alert(error)
+                console.log(error);
             } finally {
                 setgeneratingImg(false)
             }
         } else {
-            alert('Enter a valid prompt')
+            console.log('Enter a valid prompt')
         }
     }
 
@@ -54,13 +54,13 @@ const CreatePost = () => {
                 await response.json()
                 navigate('/')
             } catch (error) {
-                alert(err)
+                console.log(err)
 
             } finally {
                 setLoading(false)
             }
         } else {
-            alert('Enter a valid prompt to generate image')
+            console.log('Enter a valid prompt to generate image')
         }
     }
 
